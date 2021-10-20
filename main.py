@@ -6,6 +6,9 @@ import os
 import requests
 import telebot
 from telebot import types
+from dotenv import load_dotenv
+
+load_dotenv()
 token_tg = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(token_tg)
 tokens = {}
