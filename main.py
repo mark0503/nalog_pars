@@ -34,45 +34,75 @@ def welcome(message):
         time.sleep(900)
 
 
+@bot.callback_query_handler(func=lambda call: call.data.startswith('Data'))
+def welcome(message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    mrk = types.KeyboardButton("Сведения")
+    mrk1 = types.KeyboardButton("Ограничения")
+    mrk2 = types.KeyboardButton("Выписка")
+    markup.add(mrk, mrk1, mrk2)
+    bot.send_message(message.chat.id, "Выберите в меню,что вам интересно о компании по ИНН.", reply_markup=markup)
+
+
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
     if message.text in ['Сведения', 'Ограничения', 'Выписка']:
         if message.text == 'Сведения':
+            keyboard = types.InlineKeyboardMarkup()
+            url_button1 = types.InlineKeyboardButton(text="Отмена.", callback_data='Data')
+            keyboard.add(url_button1)
             bot.send_message(
                 message.from_user.id,
                 'Введите ИНН организации',
-                parse_mode='html'
+                parse_mode='html',
+                reply_markup=keyboard
             )
             bot.register_next_step_handler(message, check_nalog)
         elif message.text == 'Ограничения':
+            keyboard = types.InlineKeyboardMarkup()
+            url_button1 = types.InlineKeyboardButton(text="Отмена.", callback_data='Data')
+            keyboard.add(url_button1)
             bot.send_message(
                 message.from_user.id,
                 'Введите ИНН организации',
-                parse_mode='html'
+                parse_mode='html',
+                reply_markup=keyboard
             )
             bot.register_next_step_handler(message, check_inn)
         elif message.text == 'Выписка':
+            keyboard = types.InlineKeyboardMarkup()
+            url_button1 = types.InlineKeyboardButton(text="Отмена.", callback_data='Data')
+            keyboard.add(url_button1)
             bot.send_message(
                 message.from_user.id,
                 'Введите ИНН организации',
-                parse_mode='html'
+                parse_mode='html',
+                reply_markup=keyboard
             )
             bot.register_next_step_handler(message, check_pdf)
 
 
 def check_nalog(message):
     if len(message.text) != 12 and len(message.text) != 10:
+        keyboard = types.InlineKeyboardMarkup()
+        url_button1 = types.InlineKeyboardButton(text="Отмена.", callback_data='Data')
+        keyboard.add(url_button1)
         bot.send_message(
             message.from_user.id,
             'ИНН содержит 10-12 символов, повторите попытку.',
-            parse_mode='html'
+            parse_mode='html',
+            reply_markup=keyboard
         )
         bot.register_next_step_handler(message, check_nalog)
     elif not message.text.isdigit():
+        keyboard = types.InlineKeyboardMarkup()
+        url_button1 = types.InlineKeyboardButton(text="Отмена.", callback_data='Data')
+        keyboard.add(url_button1)
         bot.send_message(
             message.from_user.id,
             'ИНН содержит только цифры.',
-            parse_mode='html'
+            parse_mode='html',
+            reply_markup=keyboard
         )
         bot.register_next_step_handler(message, check_nalog)
     else:
@@ -379,17 +409,25 @@ def captcha_resolve(message):
 
 def check_pdf(message):
     if len(message.text) != 12 and len(message.text) != 10:
+        keyboard = types.InlineKeyboardMarkup()
+        url_button1 = types.InlineKeyboardButton(text="Отмена.", callback_data='Data')
+        keyboard.add(url_button1)
         bot.send_message(
             message.from_user.id,
             'ИНН содержит 10-12 символов, повторите попытку.',
-            parse_mode='html'
+            parse_mode='html',
+            reply_markup=keyboard
         )
         bot.register_next_step_handler(message, check_pdf)
     elif not message.text.isdigit():
+        keyboard = types.InlineKeyboardMarkup()
+        url_button1 = types.InlineKeyboardButton(text="Отмена.", callback_data='Data')
+        keyboard.add(url_button1)
         bot.send_message(
             message.from_user.id,
             'ИНН содержит только цифры.',
-            parse_mode='html'
+            parse_mode='html',
+            reply_markup=keyboard
         )
         bot.register_next_step_handler(message, check_pdf)
     else:
@@ -417,17 +455,25 @@ def check_pdf(message):
 
 def check_inn(message):
     if len(message.text) != 12 and len(message.text) != 10:
+        keyboard = types.InlineKeyboardMarkup()
+        url_button1 = types.InlineKeyboardButton(text="Отмена.", callback_data='Data')
+        keyboard.add(url_button1)
         bot.send_message(
             message.from_user.id,
             'ИНН содержит 10-12 символов, повторите попытку.',
-            parse_mode='html'
+            parse_mode='html',
+            reply_markup=keyboard
         )
         bot.register_next_step_handler(message, check_nalog)
     elif not message.text.isdigit():
+        keyboard = types.InlineKeyboardMarkup()
+        url_button1 = types.InlineKeyboardButton(text="Отмена.", callback_data='Data')
+        keyboard.add(url_button1)
         bot.send_message(
             message.from_user.id,
             'ИНН содержит только цифры.',
-            parse_mode='html'
+            parse_mode='html',
+            reply_markup=keyboard
         )
         bot.register_next_step_handler(message, check_inn)
     else:
