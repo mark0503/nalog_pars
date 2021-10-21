@@ -30,7 +30,7 @@ def welcome(message):
     markup.add(mrk, mrk1, mrk2)
     bot.send_message(message.chat.id, "Выберите в меню,что вам интересно о компании по ИНН.", reply_markup=markup)
     while True:
-        bot.send_message(message.chat.id, "Выберите в меню,что вам интересно о компании по ИНН.", reply_markup=markup)
+        requests.get('https://colorscheme.ru/')
         time.sleep(60)
 
 
