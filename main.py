@@ -7,6 +7,8 @@ import requests
 import telebot
 from telebot import types
 from dotenv import load_dotenv
+import time
+
 
 load_dotenv()
 token_tg = os.getenv('TELEGRAM_TOKEN')
@@ -27,6 +29,9 @@ def welcome(message):
     mrk2 = types.KeyboardButton("Выписка")
     markup.add(mrk, mrk1, mrk2)
     bot.send_message(message.chat.id, "Выберите в меню,что вам интересно о компании по ИНН.", reply_markup=markup)
+    while True:
+        bot.send_message(message.chat.id, "Выберите в меню,что вам интересно о компании по ИНН.", reply_markup=markup)
+        time.sleep(60)
 
 
 @bot.message_handler(content_types=['text'])
