@@ -31,7 +31,7 @@ def welcome(message):
     bot.send_message(message.chat.id, "Выберите в меню,что вам интересно о компании по ИНН.", reply_markup=markup)
     while True:
         requests.get('https://colorscheme.ru/')
-        time.sleep(60)
+        time.sleep(900)
 
 
 @bot.message_handler(content_types=['text'])
