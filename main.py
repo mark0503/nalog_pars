@@ -35,13 +35,8 @@ def welcome(message):
 
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith('Data'))
-def welcome(message):
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    mrk = types.KeyboardButton("Сведения")
-    mrk1 = types.KeyboardButton("Ограничения")
-    mrk2 = types.KeyboardButton("Выписка")
-    markup.add(mrk, mrk1, mrk2)
-    bot.send_message(message.chat.id, "Выберите в меню,что вам интересно о компании по ИНН.", reply_markup=markup)
+def welcome(call):
+    bot.send_message(call.message.chat.id, "Выберите в меню,что вам интересно о компании по ИНН.")
 
 
 @bot.message_handler(content_types=['text'])
